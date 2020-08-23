@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 16/06/2020 17:55:23 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.Empleado" table="empleado" catalog="final" optimistic-lock="version">
+        <id name="idempleado" type="java.lang.Integer">
+            <column name="IDEmpleado" />
+            <generator class="identity" />
+        </id>
+        <property name="dni" type="int">
+            <column name="DNI" not-null="true" />
+        </property>
+        <property name="nombre" type="string">
+            <column name="nombre" length="65535" not-null="true" />
+        </property>
+        <property name="telefono" type="int">
+            <column name="telefono" not-null="true" />
+        </property>
+        <property name="direccion" type="string">
+            <column name="direccion" length="65535" not-null="true" />
+        </property>
+        <set name="registros" table="registro" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="IDEmpleado" not-null="true" />
+            </key>
+            <one-to-many class="modelo.Registro" />
+        </set>
+    </class>
+</hibernate-mapping>

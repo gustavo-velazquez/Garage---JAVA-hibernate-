@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 16/06/2020 17:55:23 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.Vehiculo" table="vehiculo" catalog="final" optimistic-lock="version">
+        <id name="idvehiculo" type="java.lang.Integer">
+            <column name="IDVehiculo" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="cliente" class="modelo.Cliente" fetch="select">
+            <column name="IDCliente" not-null="true" />
+        </many-to-one>
+        <property name="patente" type="string">
+            <column name="Patente" length="20" not-null="true" />
+        </property>
+        <property name="tipo" type="string">
+            <column name="Tipo" length="65535" not-null="true" />
+        </property>
+        <property name="color" type="string">
+            <column name="Color" length="65535" not-null="true" />
+        </property>
+        <property name="marca" type="string">
+            <column name="Marca" length="65535" not-null="true" />
+        </property>
+        <property name="precioHora" type="double">
+            <column name="PrecioHora" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="estado" type="java.lang.Boolean">
+            <column name="Estado" />
+        </property>
+        <set name="registros" table="registro" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="IDVehiculo" not-null="true" />
+            </key>
+            <one-to-many class="modelo.Registro" />
+        </set>
+    </class>
+</hibernate-mapping>
